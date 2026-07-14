@@ -308,6 +308,61 @@ body {
   transform: scale(1.06);
 }
 
+/* мобайл: фото не кликабельны (не открываются) */
+@media (max-width: 719px) {
+  .photo {
+    cursor: default;
+  }
+}
+
+/* ---- lightbox (фото поверх страницы, только десктоп) ---- */
+.lightbox {
+  position: fixed;
+  inset: 0;
+  z-index: 100;
+  display: none;
+  align-items: center;
+  justify-content: center;
+  padding: 40px;
+  background: rgba(10, 2, 3, 0.9);
+  backdrop-filter: blur(6px);
+  -webkit-backdrop-filter: blur(6px);
+  cursor: zoom-out;
+}
+.lightbox.open {
+  display: flex;
+  animation: lbfade 0.2s ease both;
+}
+@keyframes lbfade {
+  from {
+    opacity: 0;
+  }
+}
+.lightbox img {
+  max-width: min(92vw, 900px);
+  max-height: 88vh;
+  border-radius: 14px;
+  box-shadow: 0 24px 70px rgba(0, 0, 0, 0.6);
+}
+.lightbox-close {
+  position: absolute;
+  top: 20px;
+  right: 26px;
+  width: 44px;
+  height: 44px;
+  border: 0;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.12);
+  color: #fff;
+  font-size: 26px;
+  line-height: 1;
+  cursor: pointer;
+  transition: background 0.18s ease;
+}
+.lightbox-close:hover {
+  background: rgba(255, 255, 255, 0.25);
+}
+
 /* ---- footer ---- */
 .foot {
   position: relative;

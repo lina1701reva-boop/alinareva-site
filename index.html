@@ -154,14 +154,20 @@
         <!-- ФОТО-ГАЛЕРЕЯ: положи фото в папку photos/ с именами 1.jpg … 6.jpg.
              Пока файла нет — показывается заглушка с иконкой. -->
         <section class="gallery" aria-label="Фотографии">
-          <a class="photo" href="photos/1.jpg" target="_blank" rel="noopener"><img src="photos/1.jpg" alt="" loading="lazy" onerror="this.remove()" /></a>
-          <a class="photo" href="photos/2.jpg" target="_blank" rel="noopener"><img src="photos/2.jpg" alt="" loading="lazy" onerror="this.remove()" /></a>
-          <a class="photo" href="photos/3.jpg" target="_blank" rel="noopener"><img src="photos/3.jpg" alt="" loading="lazy" onerror="this.remove()" /></a>
+          <a class="photo" href="photos/1.jpg"><img src="photos/1.jpg" alt="" loading="lazy" onerror="this.remove()" /></a>
+          <a class="photo" href="photos/2.jpg"><img src="photos/2.jpg" alt="" loading="lazy" onerror="this.remove()" /></a>
+          <a class="photo" href="photos/3.jpg"><img src="photos/3.jpg" alt="" loading="lazy" onerror="this.remove()" /></a>
         </section>
       </section>
     </main>
 
     <footer class="foot">© <span id="year"></span> Alina Reva</footer>
+
+    <!-- Лайтбокс: фото открывается поверх страницы (только на десктопе) -->
+    <div class="lightbox" id="lightbox" aria-hidden="true">
+      <button class="lightbox-close" aria-label="Закрыть">×</button>
+      <img src="" alt="" />
+    </div>
 
     <script>
       document.getElementById("year").textContent = new Date().getFullYear();
@@ -173,6 +179,32 @@
         const open = moreBtn.getAttribute("aria-expanded") === "true";
         moreBtn.setAttribute("aria-expanded", String(!open));
         moreList.classList.toggle("open", !open);
+      });
+
+      // Галерея: на компе фото открывается в лайтбоксе поверх страницы;
+      // на телефоне (узкий экран) — не открывается вообще.
+      const lightbox = document.getElementById("lightbox");
+      const lightboxImg = lightbox.querySelector("img");
+      const isDesktop = () => window.matchMedia("(min-width: 720px)").matches;
+
+      document.querySelectorAll(".photo").forEach((a) => {
+        a.addEventListener("click", (e) => {
+          e.preventDefault(); // никогда не уходим на другую вкладку/страницу
+          if (!isDesktop()) return; // на мобиле фото не открываются
+          lightboxImg.src = a.getAttribute("href");
+          lightbox.classList.add("open");
+          lightbox.setAttribute("aria-hidden", "false");
+        });
+      });
+
+      function closeLightbox() {
+        lightbox.classList.remove("open");
+        lightbox.setAttribute("aria-hidden", "true");
+        lightboxImg.src = "";
+      }
+      lightbox.addEventListener("click", closeLightbox);
+      document.addEventListener("keydown", (e) => {
+        if (e.key === "Escape") closeLightbox();
       });
     </script>
   </body>
