@@ -205,6 +205,73 @@ body {
   transform: translateX(0);
 }
 
+/* ---- expandable "other platforms" ---- */
+.more {
+  display: contents;
+}
+.more-btn {
+  width: 100%;
+  cursor: pointer;
+  font-family: inherit;
+}
+.more-btn .chevron {
+  color: rgba(255, 255, 255, 0.8);
+  font-size: 18px;
+  line-height: 1;
+  transition: transform 0.25s ease;
+}
+.more-btn[aria-expanded="true"] .chevron {
+  transform: rotate(180deg);
+}
+
+/* сам список: плавно раскрывается (grid 0fr → 1fr, один внутренний блок) */
+.more-list {
+  display: grid;
+  grid-template-rows: 0fr;
+  overflow: hidden;
+  transition: grid-template-rows 0.32s ease;
+}
+.more-list.open {
+  grid-template-rows: 1fr;
+}
+.more-inner {
+  min-height: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  padding-top: 10px;
+}
+
+.sub-link {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  padding: 14px 20px;
+  border-radius: 40px;
+  background: rgba(0, 0, 0, 0.12);
+  border: 1.5px solid rgba(255, 255, 255, 0.35);
+  color: #fff;
+  text-decoration: none;
+  font-size: 14px;
+  font-weight: 600;
+  transition: background 0.18s ease, border-color 0.18s ease,
+    transform 0.18s ease;
+}
+.sub-link:hover {
+  background: rgba(255, 255, 255, 0.14);
+  border-color: rgba(255, 255, 255, 0.85);
+  transform: translateY(-1px);
+}
+.sub-link .arrow {
+  color: rgba(255, 255, 255, 0.75);
+  opacity: 0;
+  transition: opacity 0.18s ease;
+}
+.sub-link:hover .arrow {
+  opacity: 1;
+}
+
 /* ---- photo gallery ---- */
 .gallery {
   margin-top: 28px;
