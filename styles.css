@@ -320,16 +320,28 @@ body {
   transform: scale(1.06);
 }
 
-/* мобайл: 3 фото идут вниз столбиком, целиком (без обрезки), не кликабельны */
+/* мобайл: фото-карусель — листаются свайпом вбок (не кликабельны) */
 @media (max-width: 719px) {
+  .gallery {
+    display: flex;
+    grid-template-columns: none;
+    overflow-x: auto;
+    gap: 12px;
+    scroll-snap-type: x mandatory;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: none; /* прячем полосу прокрутки (Firefox) */
+    /* чтобы крайние карточки не липли к краям экрана */
+    padding: 2px 4px 6px;
+    margin-left: -4px;
+    margin-right: -4px;
+  }
+  .gallery::-webkit-scrollbar {
+    display: none; /* прячем полосу прокрутки (Safari/Chrome) */
+  }
   .photo {
     cursor: default;
-    aspect-ratio: auto; /* натуральные пропорции, не режем под 3:4 */
-    background: none;
-  }
-  .photo img {
-    position: static; /* фото занимает всю свою высоту */
-    height: auto;
+    flex: 0 0 82%; /* карточка почти во всю ширину, следующая чуть выглядывает */
+    scroll-snap-align: center;
   }
 }
 
