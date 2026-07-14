@@ -308,10 +308,16 @@ body {
   transform: scale(1.06);
 }
 
-/* мобайл: фото не кликабельны (не открываются) */
+/* мобайл: 3 фото идут вниз столбиком, целиком (без обрезки), не кликабельны */
 @media (max-width: 719px) {
   .photo {
     cursor: default;
+    aspect-ratio: auto; /* натуральные пропорции, не режем под 3:4 */
+    background: none;
+  }
+  .photo img {
+    position: static; /* фото занимает всю свою высоту */
+    height: auto;
   }
 }
 
