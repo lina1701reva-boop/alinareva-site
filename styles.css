@@ -205,24 +205,16 @@ body {
   transform: translateX(0);
 }
 
-/* выделенная кнопка (Telegram — личное): залита белым, красный текст */
-.link-featured {
-  background: #fff;
-  border-color: #fff;
-  color: #b3121f;
-  box-shadow: 0 8px 26px rgba(0, 0, 0, 0.22);
-}
-.link-featured .ic {
-  color: #b3121f;
-}
-.link-featured .arrow {
-  color: #b3121f;
-}
+/* Telegram — личное: как остальные, но особый ховер (белая заливка + красный
+   текст только при наведении) */
 .link-featured:hover {
   background: #fff;
   border-color: #fff;
-  transform: translateY(-3px) scale(1.015);
-  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.3);
+  color: #b3121f;
+}
+.link-featured:hover .ic,
+.link-featured:hover .arrow {
+  color: #b3121f;
 }
 
 /* ---- expandable "other platforms" ---- */
